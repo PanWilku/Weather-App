@@ -1,8 +1,15 @@
+import { worldCapitals } from "../../capitals";
 import "./style.css";
+import { CONFIG } from "../../config";
 
 
-document.querySelector('#app').innerHTML = `
-  <div class="bg-blue-200 flex">
-      <h1 class="p-12 bg-emerald-200 font-bold">SIEMA</h1>
-  </div>
-`
+console.log("API Key:", CONFIG.API_KEY);
+
+
+
+
+fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${worldCapitals[0].capital}?key=${CONFIG.API_KEY}`)
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.log(error));
+
