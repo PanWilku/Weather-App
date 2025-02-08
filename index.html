@@ -6,10 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
   </head>
-  <body class="flex w-full h-full justify-center items-center bg-blue-200">
+  <body id="body" class="flex w-full h-full justify-center items-center bg-blue-200">
     <div id="app" class="flex gap-2 items-center justify-center">
-      <input placeholder="Enter location" class="border-2 h-12 rounded-xl pl-2" />
-      <button class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+      <div id="search-div">
+        <input id="location-input" placeholder="Enter location" class="border-2 h-12 rounded-xl pl-2 w-[250px]" />
+        <div id="suggestions">
+        
+        </div>
+      </div>
+      <button id="search-btn" class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
         <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
         Search
         </span>
