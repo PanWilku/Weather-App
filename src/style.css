@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+
+.body-default {
+    background: rgb(187,177,236);
+    background: radial-gradient(circle, rgba(187,177,236,1) 0%, rgba(218,234,252,1) 100%);
+}
+
+.body-night {
+    background: rgb(83,51,240);
+    background: radial-gradient(circle, rgba(83,51,240,1) 0%, rgba(2,16,32,1) 100%);
+}
+
+.body-day {
+    background: rgb(28,156,232);
+background: radial-gradient(circle, rgba(28,156,232,1) 0%, rgba(214,239,255,1) 100%);
+}
