@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
   </head>
-  <body id="body" class="flex w-full h-full justify-center items-center bg-blue-200">
-    <div id="app" class="flex gap-2 items-center justify-center">
-      <div id="search-div">
+  <body id="body" class="flex flex-col w-full h-full justify-center items-center bg-blue-200">
+    <div id="app-1" class="flex flex-col h-full w-full justify-end"></div>
+    <div id="app" class="flex w-full gap-2 items-center justify-center pt-15 pb-15">
+      <div id="search-div" class="flex items-center justify-center">
         <input id="location-input" placeholder="Enter location" class="border-2 h-12 rounded-xl pl-2 w-[250px]" />
         <div id="suggestions">
         </div>
@@ -19,6 +20,7 @@
         </span>
         </button>
     </div>
+    <div id="app-3" class="relative flex h-full w-full justify-center"></div>
 
     <script type="module" src="/src/main.js"></script>
   </body>

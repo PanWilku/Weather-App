@@ -14,9 +14,9 @@ const locationInput = document.getElementById("location-input");
 const searchBtn = document.getElementById("search-btn");
 const searchDiv = document.getElementById("search-div");
 const suggestions = document.getElementById("suggestions");
+const app1 = document.getElementById("app-1");
+const app3 = document.getElementById("app-3");
 
-
-searchDiv.className = "flex flex-col h-full";
 
 let resultsDiv;
 resultsDiv = document.createElement("div");
@@ -62,8 +62,8 @@ function updateSearch(userInput) {
   console.log(resultsDivChildren);
 
   suggestions.className = "flex flex-col relative";
-  resultsDiv.className = "absolute w-[250px] flex flex-col max-w-[250px] bg-zinc-300";
-  suggestions.appendChild(resultsDiv);
+  resultsDiv.className = "absolute -top-[60px] w-[250px] flex flex-col max-w-[250px] bg-zinc-300 mr-25";
+  app3.appendChild(resultsDiv);
   lastResult = resultsDiv.innerHTML;
 };
 
@@ -101,16 +101,30 @@ searchBtn.addEventListener("click", () => {
 async function handleSearchBtn(locationInput) {
   const queryData = locationInput.split(",")[0].trim();
   const queryResult = await handleSearch(queryData);
-  const result = [queryResult.currentConditions.datetime, queryResult.currentConditions.temp];
+  const [datetime, temperature, conditions] = [queryResult.currentConditions.datetime,
+     queryResult.currentConditions.temp, queryResult.currentConditions.conditions];
   console.log(queryResult.currentConditions.datetime);
   
 
 
 
+  const timeDiv = document.createElement("div");
+  timeDiv.id = "time-div";
   const temperatureDiv = document.createElement("div");
-  temperatureDiv.className = "flex absolute w-[350px] top-100 bg-red-200 justify-center"
-  temperatureDiv.innerHTML = `Time:${result[0]}, Temperature: ${result[1]} Farenheit`;
-  searchDiv.prepend(temperatureDiv);
+  temperatureDiv.id = "temp-div";
+  const conditionsDiv = document.createElement("div");
+  conditionsDiv.id = "con-div";
+  timeDiv.className = "flex justify-center"
+  timeDiv.innerHTML = `${datetime}`;
+  temperatureDiv.className = "flex justify-center";
+  temperatureDiv.innerHTML = `${temperature} Farenheit`;
+  conditionsDiv.className = "flex justify-center";
+  conditionsDiv.innerHTML = `${conditions}`
+  app1.append(timeDiv);
+  app1.append(temperatureDiv);
+  app3.append(conditions);
+
+  handleFront(datetime, temperature, conditions);
 }
 
 
