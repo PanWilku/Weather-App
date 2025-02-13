@@ -5,11 +5,14 @@ const body = document.getElementById("body");
 
 export function handleFront(datetime, temperature, conditions) {
   const hours = datetime.substring(0, 2);
+  console.log(hours);
+
+  // remove classes before reassigning
+  body.classList.remove("body-default", "body-night", "body-day");
 
   if (hours > 18 || hours < 5) {
-    body.classList.replace("body-default", "body-night");
+    body.classList.add("body-night");
   } else {
-    body.classList.replace("body-night", "body-day");
-    body.classList.replace("body-default", "body-day");
-  }
-}
+    body.classList.add("body-day");
+  };
+};

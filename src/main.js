@@ -55,10 +55,6 @@ function updateSearch(userInput) {
     resultsDiv.appendChild(div);
   });
 
-  resultsDivChildren = resultsDiv.children;
-
-  console.log(resultsDivChildren);
-
   suggestions.className = "flex flex-col relative";
   resultsDiv.className =
     "absolute left-[135px] -top-[60px] w-[250px] flex flex-col max-w-[250px] bg-zinc-300 mr-25";
@@ -68,6 +64,7 @@ function updateSearch(userInput) {
 
 //handles removing search results after clicking on one of the pTags and sets value of input
 locationInput.addEventListener("blur", () => {
+  resultsDivChildren = resultsDiv.children;
   console.log("unfocused");
   if (resultsDiv) {
     for (let i = 0; i < resultsDivChildren.length; i++) {
@@ -99,7 +96,8 @@ function clearWeatherResults() {
   }
 }
 
-let finalTemperature;
+let originalTemperature;
+let temperature;
 //handle search button behavior
 searchBtn.addEventListener("click", () => {
   clearWeatherResults();
@@ -109,12 +107,13 @@ searchBtn.addEventListener("click", () => {
 async function handleSearchBtn(locationInput) {
   const queryData = locationInput.split(",")[0].trim();
   const queryResult = await handleSearch(queryData);
-  const [datetime, temperature, conditions] = [
+  const [datetime, conditions] = [
     queryResult.currentConditions.datetime,
-    queryResult.currentConditions.temp,
     queryResult.currentConditions.conditions,
   ];
-  console.log(queryResult.currentConditions.datetime);
+  originalTemperature = queryResult.currentConditions.temp;
+
+  temperature = tempScale === "°C" ? toCelsius(originalTemperature) : originalTemperature;
 
   const timeDiv = document.createElement("div");
   timeDiv.id = "time-div";
@@ -125,12 +124,8 @@ async function handleSearchBtn(locationInput) {
   timeDiv.className = "flex justify-center text-2xl";
   timeDiv.innerHTML = `Time: ${datetime}`;
   temperatureDiv.className = "flex justify-center text-6xl";
-  if (tempScale === "°C") {
-    finalTemperature = toCelsius(temperature);
-  } else {
-    finalTemperature = temperature;
-  }
-  temperatureDiv.innerHTML = `${finalTemperature} ${tempScale}`;
+
+  temperatureDiv.innerHTML = `${temperature} ${tempScale}`;
   conditionsDiv.className = "flex justify-center text-2xl";
   conditionsDiv.innerHTML = `${conditions}`;
   app1.append(temperatureDiv);
@@ -154,21 +149,17 @@ function handleSearch(queryData) {
 
 //listener for toggle
 tempToggle.addEventListener("change", (event) => {
+  const temperatureDiv = document.getElementById("temp-div");
   if (event.target.checked) {
     tempScale = "°C";
     console.log("Switched to C!");
-    const temperatureDiv = document.getElementById("temp-div");
-    const result = toCelsius(finalTemperature);
-    if (temperatureDiv) {
-      temperatureDiv.innerHTML = `${result} ${tempScale}`;
-    }
+    temperature = toCelsius(originalTemperature);
   } else {
     tempScale = "°F";
     console.log("Switched to F!");
-    const temperatureDiv = document.getElementById("temp-div");
-    const result = toFarenheit(finalTemperature);
-    if (temperatureDiv) {
-      temperatureDiv.innerHTML = `${result} ${tempScale}`;
-    }
+    temperature = originalTemperature;
+  }
+  if (temperatureDiv) {
+    temperatureDiv.innerHTML = `${temperature} ${tempScale}`;
   }
 });
