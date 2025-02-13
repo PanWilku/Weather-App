@@ -6,7 +6,6 @@ import { handleFront } from "./handleFront";
 import { toCelsius, toFarenheit } from "../utils";
 import { createLoadingPage, removeLoadingPage } from "./resultsLoading";
 
-
 console.log("API Key:", CONFIG.API_KEY);
 
 const fuse = new Fuse(worldCapitals, { keys: ["country", "capital"] });
@@ -42,7 +41,7 @@ function handleLastResult(lastResult) {
   console.log(typeof lastResult);
   resultsDiv.innerHTML = lastResult;
   resultsDiv.className =
-    "absolute left-[135px] -top-[60px] w-[250px] flex flex-col max-w-[250px] bg-zinc-300 mr-25";
+    "absolute left-[515px] w-[250px] flex flex-col max-w-[250px] bg-zinc-300 mr-25";
   app3.appendChild(resultsDiv);
 }
 
@@ -58,9 +57,9 @@ function updateSearch(userInput) {
     resultsDiv.appendChild(div);
   });
 
-  suggestions.className = "flex flex-col relative";
+  suggestions.className = "flex relative";
   resultsDiv.className =
-    "absolute left-[135px] -top-[60px] w-[250px] flex flex-col max-w-[250px] bg-zinc-300 mr-25";
+    "absolute left-[515px] w-[250px] flex flex-col max-w-[250px] bg-zinc-300 mr-25";
   app3.appendChild(resultsDiv);
   lastResult = resultsDiv.innerHTML;
 }
@@ -107,53 +106,47 @@ searchBtn.addEventListener("click", () => {
   handleSearchBtn(locationInput.value);
 });
 
-
-
-
-
 async function handleSearchBtn(locationInput) {
-
   createLoadingPage();
 
   try {
-  const queryData = locationInput.split(",")[0].trim();
-  const queryResult = await handleSearch(queryData);
-  const [datetime, conditions] = [
-    queryResult.currentConditions.datetime,
-    queryResult.currentConditions.conditions,
-  ];
-  originalTemperature = queryResult.currentConditions.temp;
+    const queryData = locationInput.split(",")[0].trim();
+    const queryResult = await handleSearch(queryData);
+    const [datetime, conditions] = [
+      queryResult.currentConditions.datetime,
+      queryResult.currentConditions.conditions,
+    ];
+    originalTemperature = queryResult.currentConditions.temp;
 
-  temperature = tempScale === "°C" ? toCelsius(originalTemperature) : originalTemperature;
+    temperature =
+      tempScale === "°C" ? toCelsius(originalTemperature) : originalTemperature;
 
-  const timeDiv = document.createElement("div");
-  timeDiv.id = "time-div";
-  const temperatureDiv = document.createElement("div");
-  temperatureDiv.id = "temp-div";
-  const conditionsDiv = document.createElement("div");
-  conditionsDiv.id = "con-div";
-  timeDiv.className = "flex justify-center text-2xl";
-  timeDiv.innerHTML = `Time: ${datetime}`;
-  temperatureDiv.className = "flex justify-center text-6xl";
+    const timeDiv = document.createElement("div");
+    timeDiv.id = "time-div";
+    const temperatureDiv = document.createElement("div");
+    temperatureDiv.id = "temp-div";
+    const conditionsDiv = document.createElement("div");
+    conditionsDiv.id = "con-div";
+    timeDiv.className = "flex justify-center text-2xl";
+    timeDiv.innerHTML = `Time: ${datetime}`;
+    temperatureDiv.className = "flex justify-center text-6xl";
 
-  temperatureDiv.innerHTML = `${temperature} ${tempScale}`;
-  conditionsDiv.className = "flex justify-center text-2xl";
-  conditionsDiv.innerHTML = `${conditions}`;
-  app1.append(temperatureDiv);
-  app1.append(timeDiv);
-  app3.append(conditions);
+    temperatureDiv.innerHTML = `${temperature} ${tempScale}`;
+    conditionsDiv.className = "flex h-full text-2xl";
+    conditionsDiv.innerHTML = `<div class="flex p-25">${conditions}</div>`;
+    app1.appendChild(temperatureDiv);
+    app1.appendChild(timeDiv);
+    app3.appendChild(conditionsDiv);
 
-  handleFront(datetime, temperature, conditions);
+    handleFront(datetime, timeDiv, temperatureDiv, conditionsDiv);
   } catch (error) {
     console.error(error);
   } finally {
     setTimeout(() => {
       removeLoadingPage();
     }, 2000);
-
-  };
-
-};
+  }
+}
 
 function handleSearch(queryData) {
   return fetch(

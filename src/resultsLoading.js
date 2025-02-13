@@ -3,7 +3,7 @@ import raindrop from "../assets/raindrop.svg";
 export function createLoadingPage() {
   const loading = document.createElement("div");
   loading.id = "loading";
-  loading.classList = "fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50 pointer-events-none opacity-0 transition-opacity duration-300"
+  loading.classList = " flex fixed w-full h-full items-center justify-center bg-gray-900 bg-opacity-50 z-50 pointer-events-none opacity-0 transition-opacity duration-300"
   const img = document.createElement("img");
   img.src = raindrop;
   img.className = "w-60 animate-pulse"
