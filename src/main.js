@@ -41,7 +41,7 @@ function handleLastResult(lastResult) {
   console.log(typeof lastResult);
   resultsDiv.innerHTML = lastResult;
   resultsDiv.className =
-    "absolute left-[515px] w-[250px] flex flex-col max-w-[250px] bg-zinc-300 mr-25";
+    "absolute max-sm:left-[65px] left-[515px] w-[250px] flex flex-col max-w-[250px] bg-zinc-300 mr-25";
   app3.appendChild(resultsDiv);
 }
 
@@ -59,7 +59,7 @@ function updateSearch(userInput) {
 
   suggestions.className = "flex relative";
   resultsDiv.className =
-    "absolute left-[515px] w-[250px] flex flex-col max-w-[250px] bg-zinc-300 mr-25";
+    "absolute max-sm:left-[65px] left-[515px] w-[250px] flex flex-col max-w-[250px] bg-zinc-300 mr-25";
   app3.appendChild(resultsDiv);
   lastResult = resultsDiv.innerHTML;
 }
