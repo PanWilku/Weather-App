@@ -4,6 +4,8 @@ import { CONFIG } from "../../config";
 import Fuse from "fuse.js";
 import { handleFront } from "./handleFront";
 import { toCelsius, toFarenheit } from "../utils";
+import { createLoadingPage, removeLoadingPage } from "./resultsLoading";
+
 
 console.log("API Key:", CONFIG.API_KEY);
 
@@ -17,6 +19,7 @@ const suggestions = document.getElementById("suggestions");
 const app1 = document.getElementById("app-1");
 const app3 = document.getElementById("app-3");
 const tempToggle = document.getElementById("switch");
+const body = document.getElementById("body");
 
 let resultsDiv;
 resultsDiv = document.createElement("div");
@@ -104,7 +107,15 @@ searchBtn.addEventListener("click", () => {
   handleSearchBtn(locationInput.value);
 });
 
+
+
+
+
 async function handleSearchBtn(locationInput) {
+
+  createLoadingPage();
+
+  try {
   const queryData = locationInput.split(",")[0].trim();
   const queryResult = await handleSearch(queryData);
   const [datetime, conditions] = [
@@ -133,7 +144,16 @@ async function handleSearchBtn(locationInput) {
   app3.append(conditions);
 
   handleFront(datetime, temperature, conditions);
-}
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setTimeout(() => {
+      removeLoadingPage();
+    }, 2000);
+
+  };
+
+};
 
 function handleSearch(queryData) {
   return fetch(
