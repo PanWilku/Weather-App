@@ -42,7 +42,7 @@ function handleLastResult(lastResult) {
   console.log(typeof lastResult);
   resultsDiv.innerHTML = lastResult;
   resultsDiv.className =
-    "absolute max-sm:left-[65px] left-[515px] w-[250px] flex flex-col max-w-[250px] bg-zinc-300 mr-25";
+    "absolute max-sm:left-[65px] left-[515px] w-[250px] flex flex-col max-w-[250px] bg-indigo-200 mr-25 rounded-b-xl gap-2";
   app3.appendChild(resultsDiv);
 }
 
@@ -54,13 +54,13 @@ function updateSearch(userInput) {
 
   results.forEach((element, index) => {
     const div = document.createElement("div");
-    div.innerHTML = `<p id="result-${index}" class="hover:cursor-pointer">${element.item.capital}, ${element.item.country}</p>`;
+    div.innerHTML = `<p id="result-${index}" class="hover:cursor-pointer text-xl p-1  hover-delay-bg hover:bg-indigo-300">${element.item.capital}, ${element.item.country}</p>`;
     resultsDiv.appendChild(div);
   });
 
   suggestions.className = "flex relative";
   resultsDiv.className =
-    "absolute max-sm:left-[65px] left-[515px] w-[250px] flex flex-col max-w-[250px] bg-zinc-300 mr-25";
+    "absolute max-sm:left-[65px] left-[515px] w-[250px] flex flex-col max-w-[250px] bg-indigo-200 mr-25 rounded-b-xl gap-2";
   app3.appendChild(resultsDiv);
   lastResult = resultsDiv.innerHTML;
 }

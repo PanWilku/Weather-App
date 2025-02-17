@@ -14,3 +14,12 @@
 .body-day {
     background: rgb(28,156,232);
 background: radial-gradient(circle, rgba(28,156,232,1) 0%, rgba(214,239,255,1) 100%);}
+
+.hover-delay-bg {
+    transition-property: background-color;
+    transition-duration: 150ms;
+    transition-delay: 50ms; /* Delay applies when leaving hover */
+  }
+  .hover-delay-bg:hover {
+    transition-delay: 0ms; /* No delay on hover in */
+  }
