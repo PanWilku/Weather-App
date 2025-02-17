@@ -6,7 +6,8 @@ import { handleFront } from "./handleFront";
 import { toCelsius, toFarenheit } from "../utils";
 import { createLoadingPage, removeLoadingPage } from "./resultsLoading";
 
-console.log("API Key:", CONFIG.API_KEY);
+//get api key with vite
+const apiKey = import.meta.env.VITE_API_KEY;
 
 const fuse = new Fuse(worldCapitals, { keys: ["country", "capital"] });
 
@@ -150,7 +151,7 @@ async function handleSearchBtn(locationInput) {
 
 function handleSearch(queryData) {
   return fetch(
-    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${queryData}?key=${CONFIG.API_KEY}`
+    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${queryData}?key=${apiKey}`
   )
     .then((response) => response.json())
     .then((data) => {
