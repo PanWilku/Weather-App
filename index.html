@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" class="flex w-full h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <script type="module" crossorigin src="/Weather-app/assets/index-NXwFtv6T.js"></script>
+    <link rel="stylesheet" crossorigin href="/Weather-app/assets/index-BeA7DjBM.css">
+  </head>
+  <body
+    id="body"
+    class="flex flex-col max-sm:w-[500px] sm:w-full sm:h-full justify-center items-center body-default"
+  >
+
+
+    <div id="app-1" class="flex flex-col h-full w-full justify-end gap-5"></div>
+    <div
+      id="app"
+      class="flex max-sm:flex-col-reverse w-full gap-2 items-center justify-center pt-15"
+    >
+      <div id="search-div" class="flex flex-col items-center justify-center">
+        <input
+          id="location-input"
+          placeholder="Enter location"
+          class="border-2 h-12 rounded-xl pl-2 w-[250px] focus:outline-none"
+        />
+        <div id="suggestions"></div>
+      </div>
+      <button
+        id="search-btn"
+        class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
+      >
+        <span
+          class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent"
+        >
+          Search
+        </span>
+      </button>
+      <div>
+        <label class="relative inline-flex items-center cursor-pointer">
+          <input id="switch" class="sr-only peer" value="" type="checkbox" />
+          <div
+            class="peer rounded-br-2xl rounded-tl-2xl outline-none duration-100 after:duration-500 w-14 h-8 bg-blue-300 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-500 after:content-['°F'] after:absolute after:outline-none after:rounded-br-xl after:rounded-tl-xl after:h-6 after:w-6 after:bg-white after:top-1 after:left-1 after:flex after:justify-center after:items-center after:text-sky-800 after:font-bold peer-checked:after:translate-x-6 peer-checked:after:content-['°C'] peer-checked:after:border-white"
+          ></div>
+        </label>
+      </div>
+    </div>
+    <div id="app-3" class="relative flex h-full max-sm:w-[375px] sm:w-[1440px] justify-center"></div>
+
+  </body>
+</html>
